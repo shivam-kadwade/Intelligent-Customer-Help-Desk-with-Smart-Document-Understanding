@@ -1,0 +1,416 @@
+{
+  "intents": [
+    {
+      "intent": "Hours",
+      "examples": [
+        {
+          "text": "What time the shop opens?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Enquiry",
+      "examples": [
+        {
+          "text": "Can I get the menu?"
+        },
+        {
+          "text": "What are offers available?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Goodmorning",
+      "examples": [
+        {
+          "text": "Good Morning"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Thanks",
+      "examples": [
+        {
+          "text": "Thank You"
+        },
+        {
+          "text": "Thank you !"
+        },
+        {
+          "text": "Thank you so much"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greeting",
+      "examples": [
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hi"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Defination",
+      "examples": [
+        {
+          "text": "What is product?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Customer_Care_Contact_Us",
+      "examples": [
+        {
+          "text": "Can I contact the business by post?"
+        },
+        {
+          "text": "Need your phone number"
+        },
+        {
+          "text": "Tell me the number to your general department"
+        },
+        {
+          "text": "What is the closest store's phone number?"
+        },
+        {
+          "text": "What is the customer number?"
+        },
+        {
+          "text": "What is you email?"
+        },
+        {
+          "text": "What number should I call to order new line of service?"
+        },
+        {
+          "text": "Where can I reach the company personally?"
+        },
+        {
+          "text": "Which is the number of the main office here in los angeles?"
+        },
+        {
+          "text": "Who can I call?"
+        },
+        {
+          "text": "Can you connect to the agent ?"
+        },
+        {
+          "text": "Is there a phone number to your shop at fort worth tx?"
+        },
+        {
+          "text": "Can I get some more information?"
+        },
+        {
+          "text": "Can I text you a question?"
+        },
+        {
+          "text": "Can you give me the number to the general manager?"
+        },
+        {
+          "text": "Can you please arrange for someone to call me!?"
+        },
+        {
+          "text": "Hi can you let me have the telephone number of my local store please?"
+        },
+        {
+          "text": "How can I contact your business?"
+        },
+        {
+          "text": "How do I best contact you when there has been a problem with my bill?"
+        },
+        {
+          "text": "I want to know number to the store closest to me"
+        },
+        {
+          "text": "I would like to speak to customer service."
+        }
+      ],
+      "description": "Find basic contact information."
+    },
+    {
+      "intent": "Product_information",
+      "examples": [
+        {
+          "text": "What are fans ?"
+        },
+        {
+          "text": "What are functions of ecobee3 thermostat ?"
+        },
+        {
+          "text": "How to set weekly schedule ?"
+        },
+        {
+          "text": "How to take care of thermostat?"
+        },
+        {
+          "text": "How to set reminder ?"
+        },
+        {
+          "text": "How to set alert ?"
+        },
+        {
+          "text": "how to customize thermostat ?"
+        },
+        {
+          "text": "How to configure wi-fi settings ?"
+        },
+        {
+          "text": "What are installation settings ?"
+        },
+        {
+          "text": "What is Ventilator ?"
+        },
+        {
+          "text": "What is heat pump ?"
+        },
+        {
+          "text": "What are thresholds ?"
+        },
+        {
+          "text": "what is heater ?"
+        },
+        {
+          "text": "how to turn on heater?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "offers",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/kadwadeshavam%40gmail.com_dev/default/Customer%20Help%20Desk.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Try again later"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1589652690372",
+      "conditions": "anything_else",
+      "dialog_node": "response_3_1589653086434",
+      "previous_sibling": "response_2_1589653082250"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?$webhook_result_1.passages[0].passage_text?>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1589652690372",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_2_1589653082250"
+    },
+    {
+      "type": "standard",
+      "title": "Connect to the customer agent",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Wait we are connecting you to an agent"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Customer_Care_Contact_Us",
+      "dialog_node": "node_5_1589814224153",
+      "previous_sibling": "node_10_1589472037747"
+    },
+    {
+      "type": "standard",
+      "title": "Ask about product",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Product_information",
+      "dialog_node": "node_8_1589652690372",
+      "previous_sibling": "node_5_1589814224153"
+    },
+    {
+      "type": "standard",
+      "title": "End",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you for visiting, have a great day !"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Thanks",
+      "dialog_node": "node_10_1589814554700",
+      "previous_sibling": "node_8_1589652690372"
+    },
+    {
+      "type": "standard",
+      "title": "Greetings",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello"
+              },
+              {
+                "text": "Hi"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Greeting",
+      "dialog_node": "node_10_1589472037747",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_10_1589814554700",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
